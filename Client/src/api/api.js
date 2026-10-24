@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:4000/api",
+  baseURL: "http://localhost:5000/api",
   headers: { "Content-Type": "application/json" },
 });
 
@@ -51,3 +51,4 @@ export const addTraining = (data) => api.post("/trainings", data);
 export const updateTraining = (id, data) => api.put(`/trainings/${id}`, data);
 export const deleteTraining = (id) => api.delete(`/trainings/${id}`);
 
+export default api; 

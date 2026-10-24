@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
-import axios from "axios";
+import api from "../../api/api";
 import { Button } from '../ui/button';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ const Login = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await axios.post("http://localhost:4000/api/auth/login", form);
+            const res = await api.post("/auth/login", form);
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user", JSON.stringify(res.data.user));
             alert("Login Successful!");
@@ -117,126 +117,3 @@ const Login = () => {
 
 export default Login
 
-// import React, { useState } from 'react';
-// import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-// import { Input } from '../ui/input';
-// import { Label } from '../ui/label';
-// import axios from "axios";
-// import { Button } from '../ui/button';
-// import { useNavigate } from 'react-router-dom';
-
-// const Login = () => {
-//     const navigate = useNavigate();
-
-//     const [form, setForm] = useState({
-//         email: "",
-//         password: ""
-//     });
-
-//     const [loading, setLoading] = useState(false);
-
-//     const handleChange = (e) => {
-//         setForm({
-//             ...form,
-//             [e.target.name]: e.target.value
-//         });
-//     };
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-//         setLoading(true);
-
-//         try {
-//             const res = await axios.post(
-//                 "http://localhost:4000/api/auth/login",
-//                 form
-//             );
-
-//             localStorage.setItem("token", res.data.token);
-//             localStorage.setItem("user", JSON.stringify(res.data.user));
-
-//             alert("Login Successful!");
-
-//             setTimeout(() => {
-//                 const role = res.data.user?.role;
-
-//                 if (role === "Employee") navigate("/employee");
-//                 else if (role === "HR") navigate("/hr");
-//                 else if (role === "Manager") navigate("/manager");
-//                 else navigate("/");
-//             }, 1200);
-
-//         } catch (error) {
-//             alert(error.response?.data?.message || "Login failed");
-//             console.log(error);
-//         } finally {
-//             setLoading(false);
-//         }
-//     };
-
-//     return (
-//         <div>
-//             <header>
-//                 <h1>HRM Portal</h1>
-
-//                 <Button onClick={() => navigate("/login")}>
-//                     Login / Register
-//                 </Button>
-//             </header>
-
-//             <div>
-//                 <Card>
-//                     <CardHeader>
-//                         <CardTitle>
-//                             HRM Portal Login
-//                         </CardTitle>
-//                     </CardHeader>
-
-//                     <CardContent>
-//                         <form onSubmit={handleSubmit}>
-//                             <div>
-//                                 <Label>Email</Label>
-//                                 <Input
-//                                     name="email"
-//                                     type="email"
-//                                     placeholder="Enter your email"
-//                                     value={form.email}
-//                                     onChange={handleChange}
-//                                     required
-//                                 />
-//                             </div>
-
-//                             <div>
-//                                 <Label>Password</Label>
-//                                 <Input
-//                                     name="password"
-//                                     type="password"
-//                                     placeholder="Enter your password"
-//                                     value={form.password}
-//                                     onChange={handleChange}
-//                                     required
-//                                 />
-//                             </div>
-
-//                             <Button
-//                                 type="submit"
-//                                 disabled={loading}
-//                             >
-//                                 {loading ? "Logging in..." : "Login"}
-//                             </Button>
-
-//                             <p>
-//                                 Don’t have an account?{" "}
-//                                 <span onClick={() => navigate("/register")}>
-//                                     Register
-//                                 </span>
-//                             </p>
-//                         </form>
-//                     </CardContent>
-//                 </Card>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Login;

@@ -15,7 +15,14 @@ const Register = async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    const user = await User.create({ name, email, password, role, department });
+    const user = await User.create({ 
+      name, 
+      email, 
+      password, 
+      role, 
+      department: department || "General" // provides a default value if missing
+    });
+    // ... rest of your code
     const token = generateToken(user._id, user.role);
 
     res.status(201).json({

@@ -3,7 +3,7 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import axios from "axios";
+import api from "../../api/api";
 import { useNavigate } from 'react-router-dom';
 
 const Register = ({ setIsLogin }) => {
@@ -17,7 +17,7 @@ const Register = ({ setIsLogin }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:4000/api/auth/register", form);
+      const res = await api.post("/auth/register", form);
       alert("Registration Successful!");
       navigate('/login')
       setIsLogin(true);
