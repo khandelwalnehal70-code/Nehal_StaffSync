@@ -45,75 +45,87 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen bg-slate-900 flex flex-col">
-            <header className="flex justify-between items-center px-8 py-5 border-b border-slate-800 bg-slate-800/40 backdrop-blur-md">
-                <h1 className="text-2xl font-bold tracking-tight text-blue-400">
-                    HRM Portal
-                </h1>
-                <Button
-                    onClick={() => navigate("/login")}
-                    className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
-                >
-                    Login / Register
-                </Button>
+        <div className="auth-page">
+            <header className="auth-header">
+                <a className="landing-brand" href="/" aria-label="StaffSync home">
+                    <span className="brand-mark">S</span><span>StaffSync</span>
+                </a>
+                <button type="button" className="auth-home-link" onClick={() => navigate("/")}>
+                    Back to home
+                </button>
             </header>
 
-            <div className="flex justify-center items-center grow">
-                <Card className="w-full max-w-md bg-slate-800/70 border border-slate-700 shadow-2xl backdrop-blur-md">
-                    <CardHeader>
-                        <CardTitle className="text-2xl font-semibold text-white text-center">
-                            HRM Portal Login
-                        </CardTitle>
-                    </CardHeader>
-                    <CardContent>
+            <div className="auth-layout">
+                <section className="auth-story">
+                    <span className="auth-story-kicker">A WARM WELCOME BACK</span>
+                    <h1>Your people<br />are right here.</h1>
+                    <p>Pick up where you left off and make today a good one.</p>
+                    <div className="auth-story-art" aria-hidden="true">
+                        <span className="story-sun" />
+                        <span className="story-flower">✳</span>
+                        <span className="story-scribble">one thing<br />at a time</span>
+                    </div>
+                    <span className="auth-story-caption">GOOD WORK STARTS WITH GOOD PEOPLE.</span>
+                </section>
+
+                <div className="auth-form-wrap">
+                    <Card className="auth-card">
+                        <CardHeader className="auth-card-header">
+                            <span className="auth-card-kicker">YOUR WORKSPACE AWAITS</span>
+                            <CardTitle className="auth-card-title">Welcome back</CardTitle>
+                            <p className="auth-card-description">Sign in to continue to your StaffSync account.</p>
+                        </CardHeader>
+                        <CardContent>
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
-                                <Label className="text-slate-300">Email</Label>
+                                <Label className="auth-label">Email address</Label>
                                 <Input
                                     name="email"
                                     type="email"
-                                    placeholder="Enter your email"
+                                    placeholder="you@company.com"
                                     value={form.email}
                                     onChange={handleChange}
-                                    className="bg-slate-700/40 text-white border-slate-600"
+                                    className="auth-input"
                                     required
                                 />
                             </div>
                             <div>
-                                <Label className="text-slate-300">Password</Label>
+                                <Label className="auth-label">Password</Label>
                                 <Input
                                     name="password"
                                     type="password"
                                     placeholder="Enter your password"
                                     value={form.password}
                                     onChange={handleChange}
-                                    className="bg-slate-700/40 text-white border-slate-600"
+                                    className="auth-input"
                                     required
                                 />
                             </div>
                             <Button
                                 type="submit"
-                                className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white"
+                                className="auth-submit"
                                 disabled={loading}
                             >
-                                {loading ? "Logging in..." : "Login"}
+                                {loading ? "Signing in..." : "Sign in"}
                             </Button>
-                            <p className="text-slate-400 text-center mt-3">
-                                Don’t have an account?{" "}
-                                <span
+                            <p className="auth-switch">
+                                New to StaffSync?{" "}
+                                <button
+                                    type="button"
                                     onClick={() => navigate("/register")}
-                                    className="text-blue-400 hover:underline cursor-pointer"
+                                    className="auth-switch-link"
                                 >
-                                    Register
-                                </span>
+                                    Create an account
+                                </button>
                             </p>
                         </form>
-                    </CardContent>
-                </Card>
+                        </CardContent>
+                    </Card>
+                    <p className="auth-privacy">A calmer workday is just around the corner.</p>
+                </div>
             </div>
         </div>
     );
 }
 
 export default Login
-

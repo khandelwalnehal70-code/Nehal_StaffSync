@@ -1,8 +1,5 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { motion } from "framer-motion";
-import { Briefcase, Users, CalendarCheck, Award } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, CalendarCheck2, HeartHandshake, Sparkles, UsersRound } from "lucide-react";
+import { createElement } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -10,93 +7,109 @@ const Home = () => {
 
   const features = [
     {
-      icon: <Users className="h-8 w-8 text-blue-500" />,
-      title: "Employee Management",
-      desc: "Manage employee records, roles, and information efficiently.",
+      number: "01",
+      icon: UsersRound,
+      title: "People, all together",
+      description: "Keep employee details and team information easy to find and simple to manage.",
+      tone: "peach",
     },
     {
-      icon: <CalendarCheck className="h-8 w-8 text-green-500" />,
-      title: "Attendance & Leave",
-      desc: "Track attendance and handle leave approvals easily.",
+      number: "02",
+      icon: CalendarCheck2,
+      title: "Time that makes sense",
+      description: "Make attendance and time-off requests part of a calmer, clearer workday.",
+      tone: "sage",
     },
     {
-      icon: <Briefcase className="h-8 w-8 text-yellow-500" />,
-      title: "HR & Manager Tools",
-      desc: "Handle team announcements, performance, and training modules.",
-    },
-    {
-      icon: <Award className="h-8 w-8 text-pink-500" />,
-      title: "Employee Growth",
-      desc: "Monitor performance and assign development trainings.",
+      number: "03",
+      icon: HeartHandshake,
+      title: "Better team moments",
+      description: "Share updates, support managers, and keep everyone connected to what matters.",
+      tone: "lavender",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white flex flex-col">
-
-      <header className="flex justify-between items-center px-8 py-5 border-b border-slate-800 bg-slate-800/40 backdrop-blur-md">
-        <h1 className="text-2xl font-bold tracking-tight text-blue-400">
-          HRM Portal
-        </h1>
-        <Button
-          onClick={() => navigate("/login")}
-          className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
-        >
-          Login / Register
-        </Button>
+    <main className="landing-page">
+      <header className="landing-header">
+        <a className="landing-brand" href="/" aria-label="StaffSync home">
+          <span className="brand-mark">S</span>
+          <span>StaffSync</span>
+        </a>
+        <nav className="landing-nav" aria-label="Main navigation">
+          <a href="#why-staffsync">Why StaffSync</a>
+          <button className="landing-login" type="button" onClick={() => navigate("/login")}>
+            Sign in <ArrowUpRight size={16} aria-hidden="true" />
+          </button>
+        </nav>
       </header>
 
-      <section className="flex flex-col items-center text-center mt-20 px-6">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold mb-4 text-white"
-        >
-          Empower Your Workforce with <span className="text-blue-500">HRM Portal</span>
-        </motion.h1>
-        <p className="text-slate-400 max-w-2xl mb-8">
-          A smart Human Resource Management platform designed to simplify attendance tracking,
-          leave management, employee records, and communication across teams.
-        </p>
-        <Button
-          size="lg"
-          onClick={() => navigate("/register")}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg"
-        >
-          Get Started
-        </Button>
+      <section className="landing-hero">
+        <div className="hero-copy">
+          <div className="hero-kicker"><Sparkles size={15} aria-hidden="true" /> A little more human, every day</div>
+          <h1>Good work starts<br />with <span>good people.</span></h1>
+          <p>
+            StaffSync brings your people, time, and team moments together —
+            so the important work feels a little easier.
+          </p>
+          <div className="hero-actions">
+            <button className="hero-primary" type="button" onClick={() => navigate("/register")}>
+              Find your flow <ArrowRight size={17} aria-hidden="true" />
+            </button>
+            <a className="hero-secondary" href="#why-staffsync">
+              Take a look <ArrowDown size={15} aria-hidden="true" />
+            </a>
+          </div>
+          <div className="hero-footnote">
+            <span className="avatar-stack" aria-hidden="true"><i>N</i><i>A</i><i>J</i></span>
+            <span>A better workday, together.</span>
+          </div>
+        </div>
+
+        <div className="hero-art" aria-label="A preview of a team's workday">
+          <div className="art-orbit orbit-one" />
+          <div className="art-orbit orbit-two" />
+          <div className="art-sun" />
+          <div className="art-note">
+            <span className="note-icon"><CalendarCheck2 size={19} aria-hidden="true" /></span>
+            <div><strong>One less thing to juggle</strong><small>Your day, in good hands.</small></div>
+            <span className="note-check">✓</span>
+          </div>
+          <div className="art-sticker">people<br />first <span>✳</span></div>
+          <span className="art-caption">WORK, WITH A LITTLE MORE HEART</span>
+        </div>
       </section>
 
-      {/* Feature Section */}
-      <section className="mt-20 px-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-        {features.map((item, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.2 }}
-          >
-            <Card className="bg-slate-800/60 border border-slate-700 hover:border-blue-600 transition-all duration-300 shadow-lg hover:shadow-blue-700/20 rounded-2xl">
-              <CardHeader className="flex flex-col items-center justify-center space-y-3">
-                {item.icon}
-                <CardTitle className="text-lg font-semibold text-center text-white">
-                  {item.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-slate-400 text-center text-sm">{item.desc}</p>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
+      <section className="landing-features" id="why-staffsync">
+        <div className="features-heading">
+          <div>
+            <p className="eyebrow">A GOOD PLACE TO START</p>
+            <h2>The everyday, made easier.</h2>
+          </div>
+          <p>Less back-and-forth. More room for people to do their best work.</p>
+        </div>
+        <div className="feature-grid">
+          {features.map(({ number, icon: Icon, title, description, tone }) => (
+            <article className="feature-card" key={number}>
+              <div className={`feature-icon ${tone}`}>
+                {createElement(Icon, { size: 21, strokeWidth: 1.8, "aria-hidden": true })}
+              </div>
+              <span className="feature-number">{number}</span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
-      {/* Footer */}
-      <footer className="mt-20 py-6 border-t border-slate-800 text-center text-slate-500 text-sm">
-        © {new Date().getFullYear()} HRM Portal — Empowering Teams, Simplifying Workflows.
+      <footer className="landing-footer">
+        <a className="landing-brand" href="/" aria-label="StaffSync home">
+          <span className="brand-mark">S</span><span>StaffSync</span>
+        </a>
+        <p>Good people. Good work. Better days.</p>
+        <span>© {new Date().getFullYear()} StaffSync</span>
       </footer>
-    </div>
+    </main>
   );
 };
 
